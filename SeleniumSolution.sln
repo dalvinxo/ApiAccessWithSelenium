@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Client", "Selenium.Client\Selenium.Client.csproj", "{0CD749AF-B96F-4256-89DC-DD2B8271DF59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.API", "Selenium.API\Selenium.API.csproj", "{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Web", "Selenium.Web\Selenium.Web.csproj", "{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Test", "Selenium.Test\Selenium.Test.csproj", "{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CD749AF-B96F-4256-89DC-DD2B8271DF59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CD749AF-B96F-4256-89DC-DD2B8271DF59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CD749AF-B96F-4256-89DC-DD2B8271DF59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CD749AF-B96F-4256-89DC-DD2B8271DF59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
