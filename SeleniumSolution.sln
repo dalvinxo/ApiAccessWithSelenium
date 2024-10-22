@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Client", "Selenium
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.API", "Selenium.API\Selenium.API.csproj", "{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Web", "Selenium.Web\Selenium.Web.csproj", "{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Test", "Selenium.Test\Selenium.Test.csproj", "{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.Web", "Selenium.Web\Selenium.Web.csproj", "{D9F593FF-C95E-47D4-A8FB-E4962F3AE926}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,13 +28,13 @@ Global
 		{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4673EE1-94CA-4C02-A5B0-D67428CCFA45}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3DE9F5F3-AC5A-4EC9-AE4F-6881B3852FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{453F5E61-8CDB-48EF-BEDB-E2BBD3D40101}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9F593FF-C95E-47D4-A8FB-E4962F3AE926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F593FF-C95E-47D4-A8FB-E4962F3AE926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F593FF-C95E-47D4-A8FB-E4962F3AE926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F593FF-C95E-47D4-A8FB-E4962F3AE926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

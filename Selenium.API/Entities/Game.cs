@@ -13,7 +13,6 @@ public class Game
     public string Developer { get; set; }
     public string ReleaseDate { get; set; }
     public string FreetogameProfileUrl { get; set; }
-    
-    // Relación con Post
+
     public ICollection<Post> Posts { get; set; }
 }
