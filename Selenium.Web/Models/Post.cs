@@ -1,4 +1,4 @@
-namespace Selenium.API.Entities;
+namespace Selenium.Web.Models;
 
 public class Post
 {

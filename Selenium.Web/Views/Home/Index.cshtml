@@ -1,8 +1,29 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model List<DtoGame>
+
+@{
+    ViewData["Title"] = "Games";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <div class="row">
+        @foreach (var game in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="@game.Thumbnail" class="card-img-top" alt="@game.Title">
+                    <div class="card-body">
+                        <h5 class="card-title">@game.Title</h5>
+                        <p class="card-text">@game.ShortDescription</p>
+                        <p><strong>Genero:</strong> @game.Genre</p>
+                        <p><strong>Plataforma:</strong> @game.Platform</p>
+                        <p><strong>Fecha de lanzamiento:</strong> @game.ReleaseDate</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@game.GameUrl" class="btn btn-primary" target="_blank">Jugar Ahora</a>
+                        <a href="@game.FreetogameProfileUrl" class="ml-2 btn btn-dark" target="_blank">Crear Articulo</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

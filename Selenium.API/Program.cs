@@ -1,5 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Selenium.API.Context;
 using Selenium.Client.Interfaces;
 using Selenium.Client.Services;
 
@@ -9,16 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-
-
-
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-// Agregar el DbContext de Entity Framework Core con SQL Server
-builder.Services.AddDbContext<GameDbContext>(options =>
-    options.UseSqlServer(connectionString));
-
 
 builder.Services.AddHttpClient<IGamesServiceClient, GamesServiceClient>(client =>
 {

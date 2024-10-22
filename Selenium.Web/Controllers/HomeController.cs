@@ -7,15 +7,21 @@ namespace Selenium.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private readonly GameService _gameService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, GameService gameService)
     {
         _logger = logger;
+        _gameService = gameService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+
+        var games = await _gameService.GetGamesAsync();
+
+
+        return View(games);
     }
 
     public IActionResult Privacy()

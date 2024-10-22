@@ -1,4 +1,4 @@
-namespace Selenium.API.Entities;
+namespace Selenium.Web.Models;
 
 public class Game
 {
@@ -14,5 +14,5 @@ public class Game
     public string ReleaseDate { get; set; }
     public string FreetogameProfileUrl { get; set; }
 
-    public ICollection<Post> Posts { get; set; }
+    // public ICollection<Post> Posts { get; set; }
 }

@@ -1,7 +1,20 @@
+using Microsoft.EntityFrameworkCore;
+using Selenium.Web.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<GameDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+
+builder.Services.AddHttpClient<GameService>();
 
 var app = builder.Build();
 

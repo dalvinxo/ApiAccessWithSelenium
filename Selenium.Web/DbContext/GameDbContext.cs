@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Selenium.API.Entities;
+using Selenium.Web.Models;
 
-namespace Selenium.API.Context;
+namespace Selenium.Web.Context;
 
 
 public class GameDbContext : DbContext
@@ -44,10 +44,10 @@ public class GameDbContext : DbContext
             .Property(p => p.Id)
             .ValueGeneratedOnAdd();
 
-        modelBuilder.Entity<Game>()
-            .HasMany(g => g.Posts)
-            .WithOne(p => p.Game)
-            .HasForeignKey(p => p.IdGame);
+        // modelBuilder.Entity<Game>()
+        //     .HasMany(g => g.Posts)
+        //     .WithOne(p => p.Game)
+        //     .HasForeignKey(p => p.IdGame);
 
 
         modelBuilder.Entity<Person>()
