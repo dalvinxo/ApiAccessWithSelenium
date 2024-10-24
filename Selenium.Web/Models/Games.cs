@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace Selenium.Web.Dto;
+namespace Selenium.Web.Models;
 
-public class DtoGame
+public class Games
 {
     public int Id { get; set; }
 

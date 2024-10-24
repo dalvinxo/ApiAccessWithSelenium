@@ -8,13 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var baseUrlServiceGame = builder.Configuration["GamesService:BaseUrl"];
+
 builder.Services.AddHttpClient<IGamesServiceClient, GamesServiceClient>(client =>
 {
-    client.BaseAddress = new Uri("https://www.freetogame.com");
+    client.BaseAddress = new Uri(baseUrlServiceGame);
 });
 
 //https://www.freetogame.com/api-doc?ref=freepublicapis.com
 //https://www.freetogame.com/api/games?platform=pc
+
 
 
 builder.Services.AddCors(options =>

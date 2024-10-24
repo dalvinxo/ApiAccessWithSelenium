@@ -15,13 +15,12 @@ public class HomeController : Controller
         _gameService = gameService;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(int? pageNumber)
     {
 
         var games = await _gameService.GetGamesAsync();
-
-
-        return View(games);
+        int pageSize = 6;
+        return View(PaginatedList<Games>.Create(games, pageNumber ?? 1, pageSize));
     }
 
     public IActionResult Privacy()
