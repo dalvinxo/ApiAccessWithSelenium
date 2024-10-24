@@ -18,45 +18,6 @@ public class GameDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 
-        // modelBuilder.Entity<Game>()
-        // .HasKey(g => g.Id);
-        // modelBuilder.Entity<Game>()
-        //     .Property(g => g.Id)
-        //     .ValueGeneratedOnAdd();
-
-        // modelBuilder.Entity<Person>()
-        //     .HasKey(p => p.Id);
-        // modelBuilder.Entity<Person>()
-        //     .Property(p => p.Id)
-        //     .ValueGeneratedOnAdd();
-
-        // modelBuilder.Entity<Pais>()
-        //     .HasKey(p => p.Id);
-        // modelBuilder.Entity<Pais>()
-        //     .Property(p => p.Id)
-        //     .ValueGeneratedOnAdd();
-
-        // modelBuilder.Entity<Post>()
-        //     .HasKey(p => p.Id);
-        // modelBuilder.Entity<Post>()
-        //     .Property(p => p.Id)
-        //     .ValueGeneratedOnAdd();
-
-        // modelBuilder.Entity<Game>()
-        //     .HasMany(g => g.Posts)
-        //     .WithOne(p => p.Game)
-        //     .HasForeignKey(p => p.IdGame);
-
-        // modelBuilder.Entity<Person>()
-        //     .HasMany(p => p.Posts)
-        //     .WithOne(p => p.Person)
-        //     .HasForeignKey(p => p.PersonId);
-
-        // modelBuilder.Entity<Pais>()
-        //     .HasMany(p => p.Persons)
-        //     .WithOne(p => p.Pais)
-        //     .HasForeignKey(p => p.PaisId);
-
         modelBuilder.Entity<Person>(entity =>
         {
             entity.HasKey(p => p.Id);
@@ -70,22 +31,34 @@ public class GameDbContext : DbContext
         {
             entity.HasKey(p => p.Id);
             entity.Property(p => p.Id).ValueGeneratedOnAdd();
+
+            entity.Property(c => c.Estado)
+                .HasDefaultValue(true);
         });
 
         modelBuilder.Entity<Post>(entity =>
         {
             entity.HasKey(p => p.Id);
             entity.Property(p => p.Id).ValueGeneratedOnAdd();
-            entity.Property(p => p.CreatedDate)
+
+            entity.Property(c => c.CreatedDate)
                 .HasDefaultValueSql("GETDATE()");
+
+            entity.Property(c => c.Estado)
+                .HasDefaultValue(true);
         });
 
         modelBuilder.Entity<Comment>(entity =>
         {
             entity.HasKey(c => c.Id);
             entity.Property(c => c.Id).ValueGeneratedOnAdd();
+
             entity.Property(c => c.CreatedDate)
                 .HasDefaultValueSql("GETDATE()");
+
+            entity.Property(c => c.Estado)
+                .HasDefaultValue(true);
+
             entity.HasMany(c => c.Replies)
                 .WithOne(c => c.ParentComment)
                 .HasForeignKey(c => c.ParentCommentId);
@@ -94,6 +67,7 @@ public class GameDbContext : DbContext
         modelBuilder.Entity<Game>(entity =>
         {
             entity.HasKey(g => g.Id);
+
             entity.Property(g => g.Id).ValueGeneratedOnAdd();
         });
 

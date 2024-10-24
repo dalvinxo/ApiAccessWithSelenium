@@ -10,5 +10,6 @@ public class Post
     public int PersonId { get; set; }
     public Person Person { get; set; }
     public DateTime CreatedDate { get; set; } = DateTime.Now;
+    public bool Estado { get; set; } = true;
     public ICollection<Comment> Comments { get; set; }
 }

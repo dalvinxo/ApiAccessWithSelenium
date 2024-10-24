@@ -6,9 +6,9 @@ public class Person
     public string Name { get; set; }
     public string Genre { get; set; }
     public int Age { get; set; }
-    public DateTime CreatedDate { get; set; } = DateTime.Now;
     public int PaisId { get; set; }
     public Pais Pais { get; set; }
+    public DateTime CreatedDate { get; set; } = DateTime.Now;
     public ICollection<Post>? Posts { get; set; }
 
 }
