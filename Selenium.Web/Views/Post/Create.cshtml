@@ -83,13 +83,12 @@
 
         <div class="form-group col-xs-12 col-sm-6 col-md-4">
             <label asp-for="Rate" class="font-weight-bold">Valoración del juego:</label>
-            <div class="d-flex align-items-center">
-                <input asp-for="Rate" type="range" class="form-control-range mr-2" min="1" max="10"
-                    oninput="document.getElementById('rate-value').textContent = this.value;" style="flex: 1;" />
-                <span id="rate-value" class="badge badge-primary" style="font-size: 1.2em;">5</span>
+            <div class="rating-input d-flex align-items-center">
+                <input asp-for="Rate" type="number" class="form-control mr-2" min="1" max="10" id="rate-input" />
             </div>
             <span asp-validation-for="Rate" class="text-danger"></span>
         </div>
+
 
     </div>
 
