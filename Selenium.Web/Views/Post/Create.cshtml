@@ -3,50 +3,102 @@
     ViewData["Title"] = "Crear Artículo";
 }
 
+<a class="btn btn-secondary text-white border-dark mb-3" asp-controller="Home" asp-action="Index"
+    style="margin-bottom: 15px;">
+    Regresar
+</a>
+
 <h2>Crear Artículo</h2>
 
 <form asp-action="Create" method="post">
     <input type="hidden" asp-for="GameId" />
+    <div class="row">
+        <h6 class="p-2">
+            Creacion de usuario
+        </h6>
 
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
+        <hr>
+        <div class="form-group col-xs-12 col-sm-6 col-md-4">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Genre"></label>
-        <input asp-for="Genre" class="form-control" />
-        <span asp-validation-for="Genre" class="text-danger"></span>
-    </div>
+        <div class="form-group col-xs-12 col-sm-6 col-md-4">
+            <label asp-for="Genre">Género</label>
+            <div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Genre" value="Hombre" />
+                    <label class="form-check-label">Hombre</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Genre" value="Mujer" />
+                    <label class="form-check-label">Mujer</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" asp-for="Genre" value="Otro" />
+                    <label class="form-check-label">Otro</label>
+                </div>
+            </div>
+            <span asp-validation-for="Genre" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Age"></label>
-        <input asp-for="Age" type="number" class="form-control" min="0" />
-        <span asp-validation-for="Age" class="text-danger"></span>
-    </div>
+        <div class="form-group col-xs-12 col-sm-6 col-md-4">
+            <label asp-for="Age"></label>
+            <input asp-for="Age" type="number" class="form-control" min="0" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="PaisId">País</label>
-        <select asp-for="PaisId" class="form-control" asp-items="ViewBag.Paises"></select>
-        <span asp-validation-for="PaisId" class="text-danger"></span>
-    </div>
+        <div class="form-group col-xs-12 col-sm-6 col-md-4">
+            <label asp-for="PaisId">País</label>
+            <select asp-for="PaisId" class="form-control" asp-items="ViewBag.Paises"></select>
+            <span asp-validation-for="PaisId" class="text-danger"></span>
+        </div>
 
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
 
-    <div class="form-group">
+        <h6 class="p-2 mt-4">
+            Creación de Artículo
+        </h6>
+
+        <hr />
+
+
+        <div class="form-group col-xs-12">
+            <label asp-for="Title"></label>
+            <textarea asp-for="Title" class="form-control"></textarea>
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group col-xs-12">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        @* <div class="form-group col-xs-12 col-sm-6 col-md-4">
         <label asp-for="Rate"></label>
-        <input asp-for="Rate" type="number" class="form-control" min="1" max="10" />
+        <input asp-for="Rate" type="range" class="form-control" min="1" max="10" />
         <span asp-validation-for="Rate" class="text-danger"></span>
+        </div> *@
+
+        <div class="form-group col-xs-12 col-sm-6 col-md-4">
+            <label asp-for="Rate" class="font-weight-bold">Valoración del juego:</label>
+            <div class="d-flex align-items-center">
+                <input asp-for="Rate" type="range" class="form-control-range mr-2" min="1" max="10"
+                    oninput="document.getElementById('rate-value').textContent = this.value;" style="flex: 1;" />
+                <span id="rate-value" class="badge badge-primary" style="font-size: 1.2em;">5</span>
+            </div>
+            <span asp-validation-for="Rate" class="text-danger"></span>
+        </div>
+
     </div>
 
-    <button type="submit" class="btn btn-primary">Guardar</button>
+    <!-- Botones de guardar con estilos adicionales -->
+    <button type="submit" class="btn btn-primary mt-3" style="margin-right: 10px;">Guardar</button>
 </form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

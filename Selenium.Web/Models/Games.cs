@@ -4,6 +4,7 @@ namespace Selenium.Web.Models;
 
 public class Games
 {
+    [JsonPropertyName("id")]
     public int Id { get; set; }
 
     [JsonPropertyName("title")]

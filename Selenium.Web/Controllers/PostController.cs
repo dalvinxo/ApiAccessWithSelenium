@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Selenium.Web.Context;
 using Selenium.Web.Models;
 
@@ -20,6 +21,11 @@ public class PostController : Controller
         _gameDbContext = gameDbContext;
     }
 
+    public async Task<IActionResult> Index()
+    {
+
+        return View();
+    }
 
     public async Task<IActionResult> Create(int Id)
     {
@@ -27,7 +33,8 @@ public class PostController : Controller
         var model = new GameFormModel
         {
             GameId = Id,
-            PaisId = 1 // Valor por defecto (puedes cambiarlo si deseas)
+            PaisId = 47,
+            Genre = "Hombre"
         };
 
         ViewBag.Paises = _gameDbContext.Paises.Select(p => new SelectListItem
@@ -42,13 +49,85 @@ public class PostController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public IActionResult Create(GameFormModel model)
+    public async Task<IActionResult> Create(GameFormModel model)
     {
         if (ModelState.IsValid)
         {
-            // Guardar en la base de datos o hacer lo necesario
-            // Ejemplo: _context.Games.Add(new Game { /* Map properties */ });
-            // _context.SaveChanges();
+
+            var game = await _gameService.GetGamesByIdAsync(model.GameId);
+
+            if (game == null)
+            {
+                return NotFound();
+            }
+
+            var gameDb = await _gameDbContext.Games.FirstOrDefaultAsync(x => x.Title.Contains(game.Title));
+
+
+            if (gameDb == null)
+            {
+
+                var newGame = new Game()
+                {
+                    Title = game.Title,
+                    ShortDescription = game.ShortDescription,
+                    Thumbnail = game.Thumbnail
+                };
+
+                _gameDbContext.Games.Add(newGame);
+                await _gameDbContext.SaveChangesAsync();
+
+                gameDb = newGame;
+            }
+
+
+            var personDb = await _gameDbContext.People.FirstOrDefaultAsync(x => x.Name == model.Name);
+
+
+            if (personDb == null)
+            {
+
+                var newPerson = new Person()
+                {
+                    Age = model.Age,
+                    Name = model.Name,
+                    Genre = model.Genre,
+                    PaisId = model.PaisId
+                };
+
+                _gameDbContext.People.Add(newPerson);
+                await _gameDbContext.SaveChangesAsync();
+
+                personDb = newPerson;
+
+
+            }
+            else
+            {
+
+                personDb.Age = model.Age;
+                personDb.Genre = model.Genre;
+                personDb.PaisId = model.PaisId;
+
+                await _gameDbContext.SaveChangesAsync();
+
+            }
+
+
+
+            var newPost = new Post()
+            {
+                Title = model.Title,
+                Description = model.Description,
+                Rate = model.Rate,
+                GameId = gameDb.Id,
+                PersonId = personDb.Id,
+                CreatedDate = DateTime.Now,
+            };
+
+
+            _gameDbContext.Posts.Add(newPost);
+            await _gameDbContext.SaveChangesAsync();
 
             return RedirectToAction("Index", "Home");
         }

@@ -15,7 +15,7 @@ public class GameService
 
     public async Task<List<Games>> GetGamesAsync()
     {
-        var response = await _httpClient.GetAsync("http://localhost:5026/games");
+        var response = await _httpClient.GetAsync("http://localhost:5026/api/games");
 
         if (response.IsSuccessStatusCode)
         {
@@ -28,7 +28,7 @@ public class GameService
 
     public async Task<Games> GetGamesByIdAsync(int Id)
     {
-        var response = await _httpClient.GetAsync($"http://localhost:5026/games/{Id}");
+        var response = await _httpClient.GetAsync($"http://localhost:5026/api/games/{Id}");
 
         if (response.IsSuccessStatusCode)
         {
