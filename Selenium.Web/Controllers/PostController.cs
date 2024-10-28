@@ -137,7 +137,7 @@ public class PostController : Controller
             _gameDbContext.Posts.Add(newPost);
             await _gameDbContext.SaveChangesAsync();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         ViewBag.Paises = _gameDbContext.Paises.Select(p => new SelectListItem
@@ -147,6 +147,31 @@ public class PostController : Controller
         }).ToList();
 
         return View(model);
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> AddComment(int postId, string content, int? parentCommentId)
+    {
+        if (string.IsNullOrWhiteSpace(content))
+        {
+            // Puedes añadir un mensaje de error o redirigir con una advertencia
+            return RedirectToAction("Index");
+        }
+
+        var comment = new Comment
+        {
+            Content = content,
+            PostId = postId,
+            ParentCommentId = parentCommentId,
+            CreatedDate = DateTime.Now,
+            Estado = true
+        };
+
+        _gameDbContext.Comments.Add(comment);
+        await _gameDbContext.SaveChangesAsync();
+
+        return RedirectToAction("Index");
     }
 
 

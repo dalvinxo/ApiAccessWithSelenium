@@ -33,8 +33,10 @@
                 <h5>Comentarios:</h5>
                 @if (post.Comments.Any())
                 {
-                    @foreach (var comment in post.Comments)
+                    @foreach (var comment in post.Comments.Where(x => x.ParentCommentId == null))
                     {
+
+
                         <div class="mb-3">
                             <p class="mb-1"><strong>Comentario:</strong> @comment.Content</p>
                             <small class="text-muted">Fecha: @comment.CreatedDate.ToString("dd MMM yyyy")</small>
@@ -50,14 +52,54 @@
                                     }
                                 </div>
                             }
+
+                            <button class="btn btn-sm btn-outline-primary mt-2"
+                                onclick="showReplyForm(@comment.Id)">Responder</button>
+                            <div id="replyForm-@comment.Id" class="mt-2 d-none">
+                                <form asp-action="AddComment" method="post">
+                                    <input type="hidden" name="PostId" value="@post.Id" />
+                                    <input type="hidden" name="ParentCommentId" value="@comment.Id" />
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="Content"
+                                            placeholder="Escribe tu respuesta..."></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-sm btn-success mt-1">Enviar</button>
+                                </form>
+                            </div>
                         </div>
+
+
+
                     }
                 }
                 else
                 {
                     <p>No hay comentarios aún.</p>
                 }
+
+                <button class="btn btn-outline-primary mt-3" onclick="showCommentForm(@post.Id)">Agregar Comentario</button>
+                <div id="commentForm-@post.Id" class="mt-2 d-none">
+                    <form asp-action="AddComment" method="post">
+                        <input type="hidden" name="PostId" value="@post.Id" />
+                        <div class="form-group">
+                            <textarea class="form-control" name="Content" placeholder="Escribe un comentario..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-1">Enviar</button>
+                    </form>
+                </div>
+
             </div>
         </div>
     }
 </div>
+
+
+<script>
+    function showCommentForm(postId) {
+        document.getElementById(`commentForm-${postId}`).classList.toggle('d-none');
+    }
+
+    function showReplyForm(commentId) {
+        document.getElementById(`replyForm-${commentId}`).classList.toggle('d-none');
+    }
+</script>
