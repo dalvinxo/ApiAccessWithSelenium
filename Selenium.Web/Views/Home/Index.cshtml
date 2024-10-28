@@ -20,7 +20,10 @@
                     </div>
                     <div class="card-footer">
                         <a href="@game.GameUrl" class="btn btn-primary" target="_blank">Jugar Ahora</a>
-                        <a href="@game.FreetogameProfileUrl" class="ml-2 btn btn-dark" target="_blank">Crear Articulo</a>
+                        <a asp-action="Edit" asp-route-id="@game.Id"
+                            class="ml-2 btn btn-dark">
+                            Crear Post
+                        </a>
                     </div>
                 </div>
             </div>

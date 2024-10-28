@@ -23,6 +23,10 @@ public class HomeController : Controller
         return View(PaginatedList<Games>.Create(games, pageNumber ?? 1, pageSize));
     }
 
+
+
+
+
     public IActionResult Privacy()
     {
         return View();

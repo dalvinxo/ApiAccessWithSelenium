@@ -34,5 +34,5 @@ public class Games
     public string ReleaseDate { get; set; }
 
     [JsonPropertyName("freetogame_profile_url")]
-    public required string FreetogameProfileUrl { get; set; }
+    public string FreetogameProfileUrl { get; set; }
 }

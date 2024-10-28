@@ -25,4 +25,17 @@ public class GameService
 
         return new List<Games>();
     }
+
+    public async Task<Games> GetGamesByIdAsync(int Id)
+    {
+        var response = await _httpClient.GetAsync($"http://localhost:5026/games/{Id}");
+
+        if (response.IsSuccessStatusCode)
+        {
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<Games>(jsonResponse) ?? new Games();
+        }
+
+        return new Games();
+    }
 }

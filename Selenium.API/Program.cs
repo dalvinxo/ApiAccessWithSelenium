@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var baseUrlServiceGame = builder.Configuration["GamesService:BaseUrl"];
+var baseUrlServiceGame = builder.Configuration["GameServices:BaseUrl"];
 
 builder.Services.AddHttpClient<IGamesServiceClient, GamesServiceClient>(client =>
 {
@@ -46,12 +46,20 @@ app.UseHttpsRedirection();
 
 app.UseCors("AllowSpecificOrigin");
 
-app.MapGet("/games", async (IGamesServiceClient gamesServiceClient) =>
+app.MapGet("api/games", async (IGamesServiceClient gamesServiceClient) =>
 {
     var games = await gamesServiceClient.GetDataAsync("/api/games?platform=pc");
     return games is not null ? Results.Ok(games) : Results.Problem("Error retrieving data.");
 })
 .WithName("GetGames")
+.WithOpenApi();
+
+app.MapGet("api/games/{id}", async (int id, IGamesServiceClient gamesServiceClient) =>
+{
+    var games = await gamesServiceClient.GetDataByIdAsync(id);
+    return games is not null ? Results.Ok(games) : Results.Problem("Error retrieving data.");
+})
+.WithName("GetGamesById")
 .WithOpenApi();
 
 
