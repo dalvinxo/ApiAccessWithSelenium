@@ -45,7 +45,7 @@ namespace Selenium.Test.Tests
             // Rellenar el campo 'Name'
             var nameField = _driver.FindElement(By.Id("Name"));
             nameField.Clear();
-            nameField.SendKeys("Nombre del Usuario");
+            nameField.SendKeys("jhon snake");
 
             // Seleccionar el género 'Hombre'
             var genreMaleOption = _driver.FindElement(By.CssSelector("input[value='Hombre']"));
@@ -62,11 +62,11 @@ namespace Selenium.Test.Tests
 
             var titleField = _driver.FindElement(By.Id("Title"));
             titleField.Clear();
-            titleField.SendKeys("Título del Artículo");
+            titleField.SendKeys("Lost Ark desde Latino América");
 
             var descriptionField = _driver.FindElement(By.Id("Description"));
             descriptionField.Clear();
-            descriptionField.SendKeys("Descripción del artículo de prueba.");
+            descriptionField.SendKeys("Lost Ark es un MMO ARPG que no debemos perder de vista este año. Un sistema de combate amplio y funcional, gran cantidad de contenido, una campaña disfrutable");
 
             // var rateField = _driver.FindElement(By.Id("Rate"));
             // rateField.SendKeys("7");
@@ -77,7 +77,7 @@ namespace Selenium.Test.Tests
 
             var rateField = _driver.FindElement(By.Id("rate-input"));
             rateField.Clear();
-            rateField.SendKeys("7");
+            rateField.SendKeys("8");
 
             // var submitButton = _driver.FindElement(By.CssSelector("button[type='submit']"));
             // submitButton.Click();
