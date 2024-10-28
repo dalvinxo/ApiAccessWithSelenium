@@ -24,7 +24,15 @@ public class PostController : Controller
     public async Task<IActionResult> Index()
     {
 
-        return View();
+        var posts = await _gameDbContext.Posts
+        .Include(x => x.Game)
+        .Include(x => x.Person)
+        .Include(x => x.Comments)
+        .ThenInclude(c => c.Replies)
+        .ToListAsync();
+
+        return View(posts);
+
     }
 
     public async Task<IActionResult> Create(int Id)

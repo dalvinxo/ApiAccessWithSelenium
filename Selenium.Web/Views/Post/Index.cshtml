@@ -2,4 +2,62 @@
     ViewData["Title"] = "Post";
 }
 
-<h2>Listado de artículos</h2>
+
+@model IEnumerable<Selenium.Web.Models.Post>
+
+@{
+    ViewBag.Title = "Posts";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-5">Novedades</h1>
+
+    @foreach (var post in Model)
+    {
+        <div class="card mb-4">
+            <div class="card-header d-flex align-items-center">
+                <img src="@post.Game.Thumbnail" alt="@post.Game.Title" class="rounded me-3"
+                    style="width: 80px; height: 80px;">
+                <div>
+                    <h4 class="mb-0">@post.Title</h4>
+                    <p class="mb-0 text-muted">Publicado por: @post.Person.Name - @post.CreatedDate.ToString("dd MMM yyyy")
+                    </p>
+                </div>
+            </div>
+            <div class="card-body">
+                <p>@post.Description</p>
+                <p><strong>Valoración:</strong> @post.Rate / 10</p>
+            </div>
+
+            <div class="card-footer">
+                <h5>Comentarios:</h5>
+                @if (post.Comments.Any())
+                {
+                    @foreach (var comment in post.Comments)
+                    {
+                        <div class="mb-3">
+                            <p class="mb-1"><strong>Comentario:</strong> @comment.Content</p>
+                            <small class="text-muted">Fecha: @comment.CreatedDate.ToString("dd MMM yyyy")</small>
+
+                            @if (comment.Replies.Any())
+                            {
+                                <div class="ms-4">
+                                    <h6>Respuestas:</h6>
+                                    @foreach (var reply in comment.Replies)
+                                    {
+                                        <p class="mb-1">- @reply.Content</p>
+                                        <small class="text-muted">Fecha: @reply.CreatedDate.ToString("dd MMM yyyy")</small>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>No hay comentarios aún.</p>
+                }
+            </div>
+        </div>
+    }
+</div>
