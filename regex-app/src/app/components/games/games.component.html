@@ -1,0 +1,31 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let game of games">
+      <div class="card h-100">
+        <img [src]="game.thumbnail" class="card-img-top" [alt]="game.title" />
+        <div class="card-body">
+          <h5 class="card-title">{{ game.title }}</h5>
+          <p class="card-text">{{ game.short_description }}</p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <strong>Género:</strong> {{ game.genre }}
+            </li>
+            <li class="list-group-item">
+              <strong>Plataforma:</strong> {{ game.platform }}
+            </li>
+            <li class="list-group-item">
+              <strong>Desarrollador:</strong> {{ game.developer }}
+            </li>
+            <li class="list-group-item">
+              <strong>Fecha de lanzamiento:</strong> {{ game.release_date }}
+            </li>
+          </ul>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <button class="btn btn-primary btn-sm">Ver detalle</button>
+          <button class="btn btn-secondary btn-sm">Crear juego</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
