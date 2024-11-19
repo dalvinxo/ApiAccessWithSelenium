@@ -121,12 +121,12 @@
     </div>
   </div>
 
-  <div class="mt-3">
+  <div class="mt-4 mb-2 d-grid gap-2 col-6 mx-auto">
+    <button type="submit" class="btn btn-success" [disabled]="gameForm.invalid">
+      Guardar
+    </button>
     <button type="button" class="btn btn-secondary" (click)="goBack()">
       Regresar
-    </button>
-    <button type="submit" class="btn btn-primary" [disabled]="gameForm.invalid">
-      Guardar
     </button>
   </div>
 </form>
