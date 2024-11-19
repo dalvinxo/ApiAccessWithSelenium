@@ -23,7 +23,7 @@ builder.Services.AddHttpClient<IGamesServiceClient, GamesServiceClient>(client =
 builder.Services.AddCors(options =>
         {
             options.AddPolicy("AllowSpecificOrigin",
-                builder => builder.WithOrigins("https://localhost:44472", "https://localhost:44471") // Cambia esto por la URL de tu frontend
+                builder => builder.WithOrigins("https://localhost:44472", "https://localhost:44471", "http://localhost:4200") // Cambia esto por la URL de tu frontend
                                   .AllowAnyMethod()
                                   .AllowAnyHeader());
         });
