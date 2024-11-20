@@ -12,7 +12,7 @@ export class GamesComponent {
 
   paginatedGames: any[] = [];
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 50;
   totalPages: number = 0;
 
   constructor(private gamesService: GamesService) {}
