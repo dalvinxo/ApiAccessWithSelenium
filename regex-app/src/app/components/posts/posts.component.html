@@ -1,52 +1,71 @@
 <div class="container mt-4">
-  <h1 class="text-center">Posts</h1>
-  <div *ngIf="posts.length === 0" class="alert alert-warning">
+  <h1 class="text-center text-primary mb-4">Listado de Posts</h1>
+  <div *ngIf="posts.length === 0" class="alert alert-warning text-center">
     No hay posts disponibles.
   </div>
-  <div *ngFor="let post of posts" class="card my-3 shadow">
-    <div class="card-body">
-      <h3 class="card-title">{{ post.title }}</h3>
-      <p class="card-text">{{ post.description }}</p>
-      <p class="card-text"><strong>Valoración:</strong> {{ post.rate }}</p>
-      <p class="card-text">
-        <strong>Fecha de creación:</strong>
-        {{ post.createdDate | date : "medium" }}
-      </p>
-      <hr />
-      <h5>Comentarios</h5>
-      <div *ngIf="post.comments.length === 0" class="text-muted">
-        No hay comentarios.
+  <div *ngFor="let post of posts" class="card mb-4 shadow-lg">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img
+          [src]="post.thumbnail"
+          [alt]="post.gameTitle"
+          class="img-fluid rounded-start"
+        />
+      </div>     
+      <div class="col-md-8">
+        <div class="card-body">
+          <h3 class="card-title text-dark">{{ post.title }}</h3>
+          <p class="card-text text-muted">
+            {{ post.description || 'Sin descripción' }}
+          </p>
+          <p class="card-text">
+            <strong>Valoración:</strong>
+            <span class="badge bg-warning text-dark">{{ post.rate }}</span>
+          </p>
+          <p class="card-text">
+            <strong>Creado por:</strong> {{ post.personName }}
+          </p>
+          <p class="card-text">
+            <strong>Fecha:</strong> {{ post.createdDate | date : 'medium' }}
+          </p>
+          <hr />
+          <h5>Comentarios</h5>
+          <div *ngIf="post.comments.length === 0" class="text-muted">
+            No hay comentarios.
+          </div>
+          <ul class="list-group list-group-flush">
+            <li
+              *ngFor="let comment of post.comments"
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <span class="text-muted">{{ comment.content }}</span>
+              <span class="badge bg-secondary text-light">{{
+                comment.createdDate | date : 'short'
+              }}</span>
+            </li>
+          </ul>
+          <hr />
+          <!-- Formulario para agregar comentarios -->
+          <h6>Agregar comentario</h6>
+          <form (submit)="addComment(post.id)">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Escribe tu comentario..."
+                [(ngModel)]="newCommentContent"
+                name="comment"
+                required
+                (ngModelChange)="validateComment()"
+              />
+              <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+            <div *ngIf="errorMessage" class="text-danger mt-2">
+              {{ errorMessage }}
+            </div>
+          </form>
+        </div>
       </div>
-      <ul class="list-group">
-        <li
-          *ngFor="let comment of post.comments"
-          class="list-group-item d-flex justify-content-between align-items-center"
-        >
-          <span>{{ comment.content }}</span>
-          <span class="badge bg-secondary text-light">{{
-            comment.createdDate | date : "short"
-          }}</span>
-        </li>
-      </ul>
-      <hr />
-      <h6>Agregar comentario</h6>
-      <form (submit)="addComment(post.id)">
-        <div class="input-group">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Escribe tu comentario..."
-            [(ngModel)]="newCommentContent"
-            name="comment"
-            required
-            (ngModelChange)="validateComment()"
-          />
-          <button class="btn btn-primary" type="submit">Enviar</button>
-        </div>
-        <div *ngIf="errorMessage" class="text-danger mt-2">
-          {{ errorMessage }}
-        </div>
-      </form>
     </div>
   </div>
 </div>

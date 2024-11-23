@@ -24,6 +24,14 @@ public class GameFormModel
     [Required(ErrorMessage = "Este campo es obligatorio")]
     public string Name { get; set; }
 
+    [DisplayName("Cedula")]
+    [Required(ErrorMessage = "Este campo es obligatorio")]
+    public string Cedula { get; set; }
+
+    [DisplayName("Telefono")]
+    [Required(ErrorMessage = "Este campo es obligatorio")]
+    public string Telefono { get; set; }
+
     [DisplayName("Género")]
     [Required(ErrorMessage = "Este campo es obligatorio")]
     public string Genre { get; set; }

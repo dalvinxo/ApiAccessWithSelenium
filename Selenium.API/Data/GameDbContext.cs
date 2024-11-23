@@ -25,6 +25,8 @@ public class GameDbContext : DbContext
             entity.HasKey(p => p.Id);
             entity.Property(p => p.Id).ValueGeneratedOnAdd();
             entity.HasIndex(p => p.Name).IsUnique();
+            entity.Property(p => p.Cedula).HasMaxLength(50);
+            entity.Property(p => p.Telefono).HasMaxLength(50);
             entity.Property(p => p.CreatedDate)
                 .HasDefaultValueSql("GETDATE()");
         });

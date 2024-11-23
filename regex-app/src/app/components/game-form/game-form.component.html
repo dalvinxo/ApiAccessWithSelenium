@@ -1,10 +1,34 @@
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+  <ol class="breadcrumb mt-4">
     <li class="breadcrumb-item"><a routerLink="/games">Juegos</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{ gameName }}</li>
   </ol>
 </nav>
-
+  <div class="row g-2 g-lg-2 pt-2 mt-4">
+     <div class="col col-sm-12 col-md-3">
+<div *ngIf="game" class="card h-75" >
+  <img [src]="game.thumbnail" class="card-img-top" [alt]="game.title" />
+  <div class="card-body">
+    <h5 class="card-title">{{ game.title }}</h5>
+    <p class="card-text">{{ game.short_description }}</p>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <strong>Género:</strong> {{ game.genre }}
+      </li>
+      <li class="list-group-item">
+        <strong>Plataforma:</strong> {{ game.platform }}
+      </li>
+      <li class="list-group-item">
+        <strong>Desarrollador:</strong> {{ game.developer }}
+      </li>
+      <li class="list-group-item">
+        <strong>Fecha de lanzamiento:</strong> {{ game.release_date }}
+      </li>
+    </ul>
+  </div>
+</div>
+     </div>
+    <div class="col col-sm-12 col-md-9">
 <h2 class="mb-4">Crear Artículo para: {{ gameName }}</h2>
 
 <form [formGroup]="gameForm" (ngSubmit)="onSubmit()">
@@ -18,6 +42,38 @@
       Este campo es obligatorio.
     </div>
   </div>
+
+  <div class="form-group">
+  <label for="cedula">Cédula</label>
+  <input
+    id="cedula"
+    type="text"
+    formControlName="cedula"
+    class="form-control"
+  />
+  <div
+    *ngIf="gameForm.get('cedula')?.invalid && gameForm.get('cedula')?.touched"
+    class="text-danger"
+  >
+    La cédula debe tener el formato ###-#######-#.
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="telefono">Teléfono</label>
+  <input
+    id="telefono"
+    type="text"
+    formControlName="telefono"
+    class="form-control"
+  />
+  <div
+    *ngIf="gameForm.get('telefono')?.invalid && gameForm.get('telefono')?.touched"
+    class="text-danger"
+  >
+    El teléfono debe tener un formato válido: (###) ###-####, ###-###-####, ### ### ####, o ##########.
+  </div>
+</div>
 
   <div class="form-group">
     <label for="genre">Género</label>
@@ -58,10 +114,10 @@
     <select id="paisId" formControlName="paisId" class="form-control">
       <option value="" disabled>Seleccione un país</option>
       <option
-        *ngFor="let pais of ['México', 'Argentina', 'Chile']"
-        [value]="pais"
+        *ngFor="let pais of countries"
+        [value]="pais.id"
       >
-        {{ pais }}
+        {{ pais.name }}
       </option>
     </select>
     <div
@@ -130,3 +186,10 @@
     </button>
   </div>
 </form>
+      </div>
+  </div>
+  
+
+
+
+

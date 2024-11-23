@@ -1,0 +1,42 @@
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: #007bff;
+}
+
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: none;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.img-fluid {
+  height: 100%;
+  object-fit: contain;
+}
+
+.list-group-item {
+  font-size: 0.9rem;
+  background-color: #f9f9f9;
+}
+
+.badge {
+  font-size: 0.8rem;
+}
+
+.input-group input {
+  border-radius: 5px 0 0 5px;
+}
+
+.input-group .btn {
+  border-radius: 0 5px 5px 0;
+}

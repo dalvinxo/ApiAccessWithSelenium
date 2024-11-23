@@ -4,6 +4,8 @@ export interface GameForm {
   rate: number;
   gameId: number;
   name: string;
+  cedula: string;
+  telefono: string;
   genre: string;
   age: number;
   paisId: number;

@@ -34,12 +34,12 @@ builder.Services.AddHttpClient<IGamesServiceClient, GamesServiceClient>(client =
 });
 
 builder.Services.AddCors(options =>
-    {
-        options.AddPolicy("AllowSpecificOrigin",
-            builder => builder.WithOrigins("https://localhost:44472", "https://localhost:44471", "http://localhost:4200") // Cambia esto por la URL de tu frontend
-                                .AllowAnyMethod()
-                                .AllowAnyHeader());
-    });
+{
+    options.AddPolicy("AllowSpecificOrigin",
+    builder => builder.WithOrigins("https://localhost:44472", "https://localhost:44471", "http://localhost:4200")
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+});
 
 var app = builder.Build();
 
@@ -49,7 +49,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 
 app.UseHttpsRedirection();
 
@@ -71,6 +70,13 @@ app.MapGet("api/games/{id}", async (int id, IGamesServiceClient gamesServiceClie
 .WithName("GetGamesById")
 .WithOpenApi();
 
+app.MapGet("api/countries", (GameDbContext db) =>
+{
+    return Results.Ok(db.Paises.Where(x => x.Estado).ToList());
+})
+.WithName("GetPaises")
+.WithOpenApi();
+
 app.MapPost("api/posts", async (GameDbContext db, GameFormModel model, IGamesServiceClient gameService) =>
 {
     if (string.IsNullOrEmpty(model.Title) || model.Rate < 1 || model.Rate > 10)
@@ -88,20 +94,28 @@ app.MapPost("api/posts", async (GameDbContext db, GameFormModel model, IGamesSer
                      Thumbnail = game.thumbnail
                  };
 
-    db.Games.Add(gameDb);
-    await db.SaveChangesAsync();
+    if (gameDb.Id == 0)
+    {
+        db.Games.Add(gameDb);
+        await db.SaveChangesAsync();
+    }
 
     var personDb = await db.People.FirstOrDefaultAsync(x => x.Name == model.Name) ??
                    new Person
                    {
                        Name = model.Name,
+                       Cedula = model.Cedula,
+                       Telefono = model.Telefono,
                        Age = model.Age,
                        Genre = model.Genre,
                        PaisId = model.PaisId
                    };
 
-    db.People.Add(personDb);
-    await db.SaveChangesAsync();
+    if (personDb.Id == 0)
+    {
+        db.People.Add(personDb);
+        await db.SaveChangesAsync();
+    }
 
     var newPost = new Post
     {
@@ -113,10 +127,25 @@ app.MapPost("api/posts", async (GameDbContext db, GameFormModel model, IGamesSer
         CreatedDate = DateTime.Now,
     };
 
-    db.Posts.Add(newPost);
-    await db.SaveChangesAsync();
+    if (newPost.Id == 0)
+    {
+        db.Posts.Add(newPost);
+        await db.SaveChangesAsync();
+    }
 
-    return Results.Created($"/posts/{newPost.Id}", newPost);
+    var dtoPost = new PostDto
+    {
+        Id = newPost.Id,
+        Title = newPost.Title,
+        Description = newPost.Description,
+        Rate = newPost.Rate,
+        PersonName = newPost.Person.Name,
+        GameTitle = newPost.Game.Title,
+        Thumbnail = newPost.Game.Thumbnail,
+        CreatedDate = newPost.CreatedDate
+    };
+
+    return Results.Created($"/posts/{newPost.Id}", dtoPost);
 })
 .WithName("PostCreatePosts")
 .WithOpenApi();
@@ -142,7 +171,7 @@ app.MapGet("api/posts", async (GameDbContext db) =>
             Comments = x.Comments.Select(c => new CommentDto()
             {
                 Content = c.Content,
-                CreatedDate = x.CreatedDate,
+                CreatedDate = c.CreatedDate,
                 Id = c.Id
             }).ToList()
         })
@@ -182,7 +211,6 @@ app.MapPost("api/comments", async (GameDbContext db, CommentFormModel model, IGa
 })
 .WithName("PostComments")
 .WithOpenApi();
-
 
 
 
